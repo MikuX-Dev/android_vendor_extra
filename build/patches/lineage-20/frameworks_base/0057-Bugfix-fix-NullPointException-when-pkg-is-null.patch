@@ -1,0 +1,32 @@
+From 62b66477b216decca376d139e60633b12e12b031 Mon Sep 17 00:00:00 2001
+From: Sichen Liu <liusichen@xiaomi.com>
+Date: Mon, 21 Nov 2022 06:47:06 +0000
+Subject: [PATCH 57/74] [Bugfix]fix NullPointException when pkg is null
+
+When running stability tests on Android13,AndroidPackage will be null sometime, it will casue system server NPE.
+
+Bug:259835905
+Test: MTBF
+
+Change-Id: I8a8e7f7a6c2dd48e0d6a704d033e965912fb2fd2
+---
+ services/core/java/com/android/server/pm/ComputerEngine.java | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/services/core/java/com/android/server/pm/ComputerEngine.java b/services/core/java/com/android/server/pm/ComputerEngine.java
+index 90f75dedef..7a07ae1b2f 100644
+--- a/services/core/java/com/android/server/pm/ComputerEngine.java
++++ b/services/core/java/com/android/server/pm/ComputerEngine.java
+@@ -5755,7 +5755,8 @@ public class ComputerEngine implements Computer {
+             return PackageInfoUtils.generateProcessInfo(sus.processes, 0);
+         } else if (settingBase instanceof PackageSetting) {
+             final PackageSetting ps = (PackageSetting) settingBase;
+-            return PackageInfoUtils.generateProcessInfo(ps.getPkg().getProcesses(), 0);
++            final AndroidPackage pkg = ps.getPkg();
++            return pkg == null ? null : PackageInfoUtils.generateProcessInfo(pkg.getProcesses(), 0);
+         }
+         return null;
+     }
+-- 
+2.42.0
+

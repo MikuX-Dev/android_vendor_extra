@@ -1,0 +1,41 @@
+From 94a57c03764c12b44a482c80cfd61a6cb5c6d8b2 Mon Sep 17 00:00:00 2001
+From: Almaz Mingaleev <mingaleev@google.com>
+Date: Mon, 13 Mar 2023 10:05:10 +0000
+Subject: [PATCH 33/74] Do not preload java.util.ImmutableCollections.
+
+It has static int field SALT which is responsible for randomization
+of iterator order.
+
+Bug: n/a
+Test: device boots
+Change-Id: I3f1f4b4d56f37495914be1967cf83bd138354e2f
+Merged-In: I3f1f4b4d56f37495914be1967cf83bd138354e2f
+---
+ config/preloaded-classes          | 1 -
+ config/preloaded-classes-denylist | 1 +
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/config/preloaded-classes b/config/preloaded-classes
+index 6de1461cc0..a6c0c3d7eb 100644
+--- a/config/preloaded-classes
++++ b/config/preloaded-classes
+@@ -14414,7 +14414,6 @@ java.util.ImmutableCollections$Set0
+ java.util.ImmutableCollections$Set1
+ java.util.ImmutableCollections$Set2
+ java.util.ImmutableCollections$SetN
+-java.util.ImmutableCollections
+ java.util.InputMismatchException
+ java.util.Iterator
+ java.util.JumboEnumSet$EnumSetIterator
+diff --git a/config/preloaded-classes-denylist b/config/preloaded-classes-denylist
+index 02f2df6167..0f7bc10bc6 100644
+--- a/config/preloaded-classes-denylist
++++ b/config/preloaded-classes-denylist
+@@ -9,3 +9,4 @@ android.net.rtp.AudioGroup
+ android.net.rtp.AudioStream
+ android.net.rtp.RtpStream
+ java.util.concurrent.ThreadLocalRandom
++java.util.ImmutableCollections
+-- 
+2.42.0
+

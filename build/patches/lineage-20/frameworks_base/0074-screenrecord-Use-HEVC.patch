@@ -1,0 +1,36 @@
+From 30d8cab65c48732b53dc652c83f939b4f542b679 Mon Sep 17 00:00:00 2001
+From: Kazuki Hashimoto <kazukih@tuta.io>
+Date: Mon, 17 Oct 2022 05:08:11 +0900
+Subject: [PATCH 74/74] screenrecord: Use HEVC
+
+media/java/android/media/MediaCodecInfo.java
+HEVCMainTierLevel41:
+
+Framerate = 60; FS =  2228224; Bitrate = 20000;
+
+Signed-off-by: Kazuki Hashimoto <kazukih@tuta.io>
+---
+ .../android/systemui/screenrecord/ScreenMediaRecorder.java  | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/packages/SystemUI/src/com/android/systemui/screenrecord/ScreenMediaRecorder.java b/packages/SystemUI/src/com/android/systemui/screenrecord/ScreenMediaRecorder.java
+index cfda8be5a2..30a7aeed8c 100644
+--- a/packages/SystemUI/src/com/android/systemui/screenrecord/ScreenMediaRecorder.java
++++ b/packages/SystemUI/src/com/android/systemui/screenrecord/ScreenMediaRecorder.java
+@@ -146,10 +146,10 @@ public class ScreenMediaRecorder extends MediaProjection.Callback {
+         refreshRate = dimens[2];
+         int vidBitRate = width * height * refreshRate / VIDEO_FRAME_RATE
+                 * VIDEO_FRAME_RATE_TO_RESOLUTION_RATIO;
+-        mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
++        mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.HEVC);
+         mMediaRecorder.setVideoEncodingProfileLevel(
+-                MediaCodecInfo.CodecProfileLevel.AVCProfileMain,
+-                MediaCodecInfo.CodecProfileLevel.AVCLevel3);
++                MediaCodecInfo.CodecProfileLevel.HEVCProfileMain,
++                MediaCodecInfo.CodecProfileLevel.HEVCMainTierLevel41);
+         mMediaRecorder.setVideoSize(width, height);
+         mMediaRecorder.setVideoFrameRate(refreshRate);
+         mMediaRecorder.setVideoEncodingBitRate(vidBitRate);
+-- 
+2.42.0
+

@@ -1,7 +1,7 @@
-From a52ba8b2831b27cd50f73d48463262df5eec9d00 Mon Sep 17 00:00:00 2001
+From 5d4f2f065bf4f9e5c661b710a7c24b0a2079c1c3 Mon Sep 17 00:00:00 2001
 From: Jeferson <jroliveira.oliveira301@gmail.com>
 Date: Fri, 17 Jun 2022 15:04:04 +0200
-Subject: [PATCH 01/20] Revert "Ignore the charging ripple flag."
+Subject: [PATCH 01/74] Revert "Ignore the charging ripple flag."
 
 This reverts commit 575a868.
 
@@ -11,7 +11,7 @@ Change-Id: I84bc2f0ac1df16f2bc4338b8f9300c35d309b56c
  1 file changed, 5 insertions(+), 4 deletions(-)
 
 diff --git a/packages/SystemUI/src/com/android/systemui/charging/WiredChargingRippleController.kt b/packages/SystemUI/src/com/android/systemui/charging/WiredChargingRippleController.kt
-index 5ca36ab3..28d121da 100644
+index 5ca36ab39d..28d121dadf 100644
 --- a/packages/SystemUI/src/com/android/systemui/charging/WiredChargingRippleController.kt
 +++ b/packages/SystemUI/src/com/android/systemui/charging/WiredChargingRippleController.kt
 @@ -98,9 +98,10 @@ class WiredChargingRippleController @Inject constructor(
