@@ -138,7 +138,7 @@ mka_build() {
     KENREL_ONLY_BUILD="false"
     RELEASE_BUILD="false"
     local DIRTY_BUILD="false"
-    local BUILD_TYPE="userdebug"
+    local BUILD_TYPE="user"
     local LOCAL_BUILD="false"
 
     while [ "$#" -gt 0 ]; do
@@ -152,7 +152,7 @@ mka_build() {
             -d|--dirty)
                     local DIRTY_BUILD="true"
                     ;;
-            --build-type)
+            -b|--build-type)
                     local BUILD_TYPE="${2}"
                     ;;
             -l|--local-build)
@@ -206,13 +206,16 @@ mka_kernel() {
     # Defs
     DEVICE=""
     KENREL_ONLY_BUILD="true"
-    local BUILD_TYPE="userdebug"
+    local BUILD_TYPE="user"
     local LOCAL_BUILD="false"
 
     while [ "$#" -gt 0 ]; do
         case "${1}" in
             --device)
                     DEVICE="${2}"
+                    ;;
+            -b|--build-type)
+                    local BUILD_TYPE="${2}"
                     ;;
             -l|--local-build)
                     local LOCAL_BUILD="true"
